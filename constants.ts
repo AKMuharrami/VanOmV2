@@ -198,7 +198,7 @@ export const UI_TRANSLATIONS = {
       cta: 'Explore Collection'
     },
     products: {
-      title: 'Curated Fragrances',
+      title: 'Curated Products',
       subtitle: 'Each scent is a journey, meticulously blended to evoke memories and emotions.',
       addToCart: 'Add to Cart',
     },
@@ -208,7 +208,7 @@ export const UI_TRANSLATIONS = {
       shipping: 'Global Shipping',
       shippingDesc: 'Fast, reliable shipping to over 100 countries with real-time tracking.',
       concierge: 'Scent Concierge',
-      conciergeDesc: 'Expert guidance to help you find your signature fragrance.'
+      conciergeDesc: 'Expert guidance to help you find your signature Product.'
     },
     footer: {
       description: 'Redefining luxury through the art of perfumery. Experience the timeless elegance of our handcrafted scents.',
