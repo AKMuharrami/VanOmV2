@@ -239,6 +239,38 @@ export const UI_TRANSLATIONS = {
       fastest: 'FASTEST',
       update: 'Update',
       calculatedAbove: 'Calculated above'
+    },
+    
+    checkout: {
+      title: 'Secure Checkout',
+      details: 'Shipping Details',
+      payment: 'Payment Method',
+      payWith: 'Pay with',
+      processing: 'Processing Payment...',
+      success: 'Order Confirmed',
+      successMsg: 'Thank you for your order. It has been successfull',
+      backToStore: 'Back to Store',
+      total: 'Total to Pay',
+      methods: {
+        thawani: 'Thawani Pay',
+        paylater: 'Pay Later',
+        card: 'Credit Card'
+      },
+      fields: {
+        name: 'Full Name',
+        email: 'Email',
+        phone: 'Phone Number (Oman)',
+        address: 'Delivery Address',
+        city: 'City',
+        cardNum: 'Card Number',
+        expiry: 'MM/YY',
+        cvv: 'CVV',
+        thawaniId: 'Thawani ID / Phone'
+      },
+      actions: {
+        continue: 'Continue to Payment',
+        pay: 'Confirm Order'
+      }
     }
   },
   ar: {
@@ -290,7 +322,7 @@ export const UI_TRANSLATIONS = {
       subtotal: 'المجموع الفرعي',
       shipping: 'الشحن',
       total: 'المجموع',
-      checkout: 'الدفع',
+      checkout: 'اطلب',
       shippingEstimator: 'حاسبة الشحن',
       destination: 'وجهة الشحن',
       calculating: 'جاري حساب أفضل الأسعار...',
@@ -311,8 +343,8 @@ export const UI_TRANSLATIONS = {
       total: 'المبلغ الإجمالي',
       methods: {
         thawani: 'ثواني',
-        omannet: 'عمان نت (بطاقة خصم)',
-        card: 'بطاقة ائتمان'
+        card: 'بطاقة ائتمان',
+        paylater: 'الدفع لاحقاً'
       },
       fields: {
         name: 'الاسم الكامل',
@@ -326,8 +358,8 @@ export const UI_TRANSLATIONS = {
         thawaniId: 'رقم ثواني / الهاتف'
       },
       actions: {
-        continue: 'متابعة للدفع',
-        pay: 'دفع'
+        continue: 'متابعة الطلب',
+        pay: 'اطلب'
       }
     }
   }

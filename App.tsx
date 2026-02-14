@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { MOCK_PRODUCTS, UI_TRANSLATIONS } from './constants';
 import { Product, CartItem, ProductSize } from './types';
@@ -7,6 +7,12 @@ import { CartDrawer } from './components/CartDrawer';
 import { AIChat } from './components/AIChat';
 import { Button } from './components/Button';
 
+// useEffect(() => {
+//   setTimeout(()=> {
+//         window.location.href = "/ar"
+
+//     }, 5000)
+// })
 // Individual Product Card with Size State
 const ProductCard: React.FC<{ 
   product: Product; 
