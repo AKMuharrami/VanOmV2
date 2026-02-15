@@ -204,10 +204,10 @@ export const UI_TRANSLATIONS = {
     },
     features: {
       authentic: 'Authentic Ingredients',
-      authenticDesc: 'Sourced directly from sustainable farms in Madagascar and Oman.',
+      authenticDesc: 'Sourced directly from sustainable farms in Papua New Guiena and Indonesia.',
       shipping: 'Global Shipping',
       shippingDesc: 'Fast, reliable shipping to over 100 countries with real-time tracking.',
-      concierge: 'Scent Concierge',
+      concierge: 'Product Concierge',
       conciergeDesc: 'Expert guidance to help you find your signature Product.'
     },
     footer: {
@@ -295,7 +295,7 @@ export const UI_TRANSLATIONS = {
     },
     features: {
       authentic: 'مكونات أصلية',
-      authenticDesc: 'مصدرها مباشرة من مزارع مستدامة في مدغشقر وأندونيسيا.',
+      authenticDesc: 'مصدرها مباشرة من مزارع مستدامة في بابوا نيو جيني وأندونيسيا.',
       shipping: 'شحن عالمي',
       shippingDesc: 'شحن سريع وموثوق لأكثر من 100 دولة مع تتبع فوري.',
       concierge: 'مستشار المنتجات',
