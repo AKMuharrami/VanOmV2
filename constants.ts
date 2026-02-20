@@ -254,7 +254,8 @@ export const UI_TRANSLATIONS = {
       methods: {
         thawani: 'Thawani Pay',
         paylater: 'Pay Later',
-        card: 'Credit Card'
+        card: 'Credit Card',
+        transfer: 'Bank Transfer'
       },
       fields: {
         name: 'Full Name',
@@ -344,7 +345,8 @@ export const UI_TRANSLATIONS = {
       methods: {
         thawani: 'ثواني',
         card: 'بطاقة ائتمان',
-        paylater: 'الدفع لاحقاً'
+        paylater: 'الدفع لاحقاً',
+        transfer: 'تحويل بنكي'
       },
       fields: {
         name: 'الاسم الكامل',

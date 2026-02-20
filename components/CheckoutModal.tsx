@@ -11,7 +11,7 @@ interface CheckoutModalProps {
 }
 
 type CheckoutStep = 'details' | 'payment' | 'processing' | 'success';
-type PaymentMethod = 'thawani' | 'paylater' | 'card';
+type PaymentMethod = 'thawani' | 'paylater' | 'transfer';
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({ 
   isOpen, 
@@ -26,13 +26,15 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const [phone, setphone] = useState('')
   const [city, setcity] = useState('')
   const [town, settown] = useState('')
+      const [apimage, setapimage] = useState('') 
+const [adimage, setadimage] = useState('')
    const handleredirect = () => {
     setTimeout(()=> {
         window.location.href = "/"
 
     }, 5000)
 };
-  let dataa = {phone:phone, image:email, sum:totalAmount, gml1:town, gml2:city, hnum:name}
+  let dataa = {phone:phone, image:apimage, sum:totalAmount, gml1:town, gml2:city, hnum:name}
   const loginn = async () => {
       const API_URL = "https://aaa-omega-cyan.vercel.app"
       const res = await fetch(`${API_URL}/fnov/vo/vo/v2`, {
@@ -207,16 +209,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
                   {/* Credit Card Option */}
                   <div 
-                    onClick={() => setPaymentMethod('card')}
-                    className={`p-4 border rounded-lg cursor-pointer flex items-center gap-4 transition-all ${paymentMethod === 'card' ? 'border-gold-500 bg-gold-50 ring-1 ring-gold-500' : 'border-stone-200 hover:border-gold-300'}`}
+                    onClick={() => setPaymentMethod('transfer')}
+                    className={`p-4 border rounded-lg cursor-pointer flex items-center gap-4 transition-all ${paymentMethod === 'transfer' ? 'border-gold-500 bg-gold-50 ring-1 ring-gold-500' : 'border-stone-200 hover:border-gold-300'}`}
                   >
                     <div className="bg-gold-100 p-2 rounded-full">
                       <CreditCard className="w-6 h-6 text-gold-700" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-bold text-stone-900">{t.methods.card}</p>
+                      <p className="font-bold text-stone-900">{t.methods.transfer}</p>
                     </div>
-                    {paymentMethod === 'card' && <Check className="w-5 h-5 text-gold-600" />}
+                    {paymentMethod === 'transfer' && <Check className="w-5 h-5 text-gold-600" />}
                   </div>
                 </div>
 
@@ -224,9 +226,35 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <div className="mt-4 p-4 bg-stone-50 rounded-md border border-stone-100">
                   {paymentMethod === 'thawani' && (
                      <div className="space-y-3">
-                        <label className="block text-sm font-medium text-stone-700">{t.fields.thawaniId}</label>
-                        <input type="text" placeholder="968 1234 5678" className="w-full border border-stone-300 p-2 rounded bg-white" />
+                        {/* <label className="block text-sm font-medium text-stone-700">{t.fields.thawaniId}</label> */}
+                        {/* <input type="text" placeholder="968 1234 5678" className="w-full border border-stone-300 p-2 rounded bg-white" /> */}
                      </div>
+                  )}
+                    {paymentMethod === 'transfer' && (
+                     <div style={{marginRight:'auto', marginLeft:'auto', display:'flex', flexDirection:'column', alignItems:'center'}}>
+                         <label for="Name" style={{color:'black', fontSize:'125%'}}>تحويل إلى </label>
+                         <br></br>
+                                <input id='Name' type="text" disabled value='96338791' name="Name" style={{marginLeft:'', height:'2.5vh', marginRight:'', backgroundColor:'white', border:'1px solid gray'}}></input>
+                                <br></br>
+                                   <h3>صورة الإيصال</h3>
+                                   <img width={200} height={200} quality={55} src={adimage} alt='' style={{objectFit:'contain', marginBottom:'5%'}}></img>
+                    <input
+        type="file"
+        placeholder='Image'
+        accept='image/*'
+        name="myImage"
+        // Event handler to capture file selection and update the state
+        onChange={ async (e)=>{
+          console.log(e.target.files)
+          const data = new FileReader()
+          data.addEventListener('load',()=>{
+            setadimage(data.result)
+            setapimage(data.result.split(',')[1])
+          })
+          data.readAsDataURL(e.target.files[0])
+        }}
+      />    
+ </div>
                   )}
                   {paymentMethod === 'paylater' && (
                      <div className="space-y-3">
