@@ -234,7 +234,7 @@ const [adimage, setadimage] = useState('')
                      <div style={{marginRight:'auto', marginLeft:'auto', display:'flex', flexDirection:'column', alignItems:'center'}}>
                          <label for="Name" style={{color:'black', fontSize:'125%'}}>تحويل إلى </label>
                          <br></br>
-                                <input id='Name' type="text" disabled value='96338791' name="Name" style={{marginLeft:'', height:'2.5vh', marginRight:'', backgroundColor:'white', border:'1px solid gray'}}></input>
+                                <input id='Name' type="text" disabled value='96338791' name="Name" className="w-full border border-stone-300 p-2 rounded bg-white"></input>
                                 <br></br>
                                    <h3>صورة الإيصال</h3>
                                    <img width={200} height={200} quality={55} src={adimage} alt='' style={{objectFit:'contain', marginBottom:'5%'}}></img>
