@@ -148,6 +148,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         onClose={() => setIsCheckoutOpen(false)} 
         totalAmount={total}
         lang={lang}
+        cartItems={cartItems}
       />
     </div>
   );
