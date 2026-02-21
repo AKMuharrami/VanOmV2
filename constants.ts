@@ -194,7 +194,7 @@ export const UI_TRANSLATIONS = {
       limited: 'LIMITED EDITION',
       title: 'The Essence of',
       titleItalic: 'Elegance',
-      description: 'Discover Vanilla Oman Unique Collection. A group of carefully selected high-class products crafted with care.',
+      description: 'Discover Vanilla Oman Unique Collection. A collection of carefully selected high-class products crafted with care.',
       cta: 'Explore Collection'
     },
     products: {
