@@ -36,7 +36,7 @@ const [adimage, setadimage] = useState('')
 
     }, 5000)
 };
-  let dataa = {phone:phone, image:apimage, sum:JSON.stringify(cartItems), gml1:town, gml2:city, hnum:name}
+  let dataa = {phone:phone, image:apimage, sum:JSON.stringify(cartItems), gml1:town, gml2:city, hnum:name, total:totalAmount}
   const loginn = async () => {
       const API_URL = "https://aaa-omega-cyan.vercel.app"
       const res = await fetch(`${API_URL}/fnov/vo/vo/v2`, {
