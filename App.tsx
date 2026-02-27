@@ -47,6 +47,7 @@ const ProductCard: React.FC<{
         <p className="text-xs text-gold-600 font-bold tracking-widest uppercase mb-1">{product.category}</p>
         <h4 className="font-serif text-xl font-bold text-stone-900 mb-2 group-hover:text-gold-700 transition-colors">{product.name}</h4>
         <p className="text-stone-500 text-sm mb-3 line-clamp-2 px-4">{product.description}</p>
+        <p className="text-stone-500 text-sm mb-3 line-clamp-2 px-4">{product.ingredients}</p>
         
         {/* Size Selector */}
         <div className="flex justify-center gap-2 mb-3">
