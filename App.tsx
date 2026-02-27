@@ -203,7 +203,7 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
         <div className="absolute inset-0">
           <img 
             src="https://hjrm8lbtnby37npy.public.blob.vercel-storage.com/322E8E4A-9D18-4D18-B5D2-D8EB91E2DDD6.JPG" 
-            alt="Luxury Perfume" 
+            alt="Luxury Products" 
             className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent"></div>
@@ -229,6 +229,9 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
           <div className="w-24 h-1 bg-gold-400 mx-auto"></div>
           <p className="mt-4 text-stone-500 max-w-2xl mx-auto">
             {t.products.subtitle}
+          </p>
+          <p className="mt-4 text-stone-500 max-w-2xl mx-auto">
+            ضمان لمدة سنة💫
           </p>
         </div>
 
