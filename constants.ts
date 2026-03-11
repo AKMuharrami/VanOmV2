@@ -10,9 +10,9 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Signature Collection',
     notes: ['Vanilla', 'Paste', 'Natural'],
     sizes: [
-      { label: '50ml', price: 6,  weightKg: 1.7},
-      { label: '100ml', price: 11.8,  weightKg: 1.7 },
-      { label: '200ml', price: 23.4,  weightKg: 1.7}
+      { label: 'OutOfStock', price: 'n/a',  weightKg: 1.7},
+      // { label: '100ml', price: 11.8,  weightKg: 1.7 },
+      // { label: '200ml', price: 23.4,  weightKg: 1.7}
     ]
   },
   {
@@ -25,8 +25,8 @@ export const MOCK_PRODUCTS: Product[] = [
      notes: ['Vanilla', 'Extract', 'Natural'],
     sizes: [
       { label: '50ml', price: 5,  weightKg: 1.7 },
-      { label: '100ml', price: 10,  weightKg: 1.7 },
-      { label: '200ml', price: 19.7, weightKg: 1.7}
+      // { label: '100ml', price: 10,  weightKg: 1.7 },
+      // { label: '200ml', price: 19.7, weightKg: 1.7}
     ]
   },
   {
