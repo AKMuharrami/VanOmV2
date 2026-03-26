@@ -24,7 +24,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Floral',
      notes: ['Vanilla', 'Extract', 'Natural'],
     sizes: [
-      { label: '50ml', price: 5,  weightKg: 1.7 },
+      // { label: '50ml', price: 5,  weightKg: 1.7 },
       // { label: '100ml', price: 10,  weightKg: 1.7 },
       // { label: '200ml', price: 19.7, weightKg: 1.7}
     ]
