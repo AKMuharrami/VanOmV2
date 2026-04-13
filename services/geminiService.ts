@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { MOCK_PRODUCTS } from '../constants';
 
 const SYSTEM_INSTRUCTION = `
@@ -27,22 +27,22 @@ export const getGeminiResponse = async (userMessage: string, history: {role: 'us
     }
 
     // Initialize client for each request or lazily to ensure safe execution
-    const ai = new GoogleGenAI({ apiKey });
-    const model = 'gemini-3-flash-preview';
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-1.5-flash",
+      systemInstruction: SYSTEM_INSTRUCTION
+    });
 
-    const chat = ai.chats.create({
-      model: model,
-      config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
-      },
+    const chat = model.startChat({
       history: history.map(h => ({
-        role: h.role,
+        role: h.role === 'model' ? 'model' : 'user',
         parts: [{ text: h.text }],
       })),
     });
 
-    const result = await chat.sendMessage({ message: userMessage });
-    return result.text;
+    const result = await chat.sendMessage(userMessage);
+    const response = await result.response;
+    return response.text();
   } catch (error) {
     console.error("Gemini API Error:", error);
     return "I apologize, but I am momentarily unable to access my fragrance notes. Please try again shortly.";
