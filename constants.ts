@@ -10,8 +10,8 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Signature Collection',
     notes: ['Vanilla', 'Paste', 'Natural'],
     sizes: [
-      { label: 'OutOfStock', price: 'n/a',  weightKg: 1.7},
-      // { label: '100ml', price: 11.8,  weightKg: 1.7 },
+      { label: '50ml', price: 6,  weightKg: 1.7},
+      { label: '100ml', price: 11.8,  weightKg: 1.7 },
       // { label: '200ml', price: 23.4,  weightKg: 1.7}
     ]
   },
