@@ -5,12 +5,13 @@
      <link rel="icon" type="image/svg+xml" href="https://hjrm8lbtnby37npy.public.blob.vercel-storage.com/phonto%20%2810%29.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla OM | Luxury Ingredients</title>
-     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script>
-      // Shim for process.env
+      // Shim for process.env to prevent ReferenceError in browser environments
       window.process = window.process || { env: {} };
-      
+    </script>
+    <script>
       tailwind.config = {
         theme: {
           extend: {
@@ -35,20 +36,6 @@
               stone: {
                 850: '#1f1f1e', // Dark charcoal for text
               }
-            },
-            animation: {
-              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-              'fade-in': 'fadeIn 0.5s ease-out forwards',
-            },
-            keyframes: {
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              fadeIn: {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
-              }
             }
           }
         }
@@ -67,7 +54,19 @@
         scrollbar-width: none;
       }
     </style>
-  </head>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.4/client",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^6.22.3"
+  }
+}
+</script>
+</head>
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
