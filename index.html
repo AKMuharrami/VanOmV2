@@ -5,31 +5,12 @@
      <link rel="icon" type="image/svg+xml" href="https://hjrm8lbtnby37npy.public.blob.vercel-storage.com/phonto%20%2810%29.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla OM | Luxury Ingredients</title>
-    <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla OM | Luxury Fragrances</title>
-    
-    <!-- Tailwind CSS via CDN for rapid styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Playfair Display for Serifs, Lato for Sans, Tajawal for Arabic -->
+     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
     <script>
-      /**
-       * SHIM: process.env
-       * Some libraries expect process.env to exist. This shim prevents 
-       * "process is not defined" errors in the browser.
-       */
+      // Shim for process.env
       window.process = window.process || { env: {} };
       
-      /**
-       * Tailwind Theme Configuration
-       * Customizing the design system with the Vanilla OM brand palette.
-       */
       tailwind.config = {
         theme: {
           extend: {
@@ -52,7 +33,7 @@
                 900: '#28200A',
               },
               stone: {
-                850: '#1f1f1e',
+                850: '#1f1f1e', // Dark charcoal for text
               }
             },
             animation: {
@@ -73,13 +54,11 @@
         }
       }
     </script>
-    
     <style>
       body {
         background-color: #FBF8F1; /* gold-50 */
         color: #1f1f1e;
       }
-      /* Utility to hide scrollbars while maintaining functionality */
       .hide-scrollbar::-webkit-scrollbar {
         display: none;
       }
@@ -90,15 +69,7 @@
     </style>
   </head>
   <body>
-    <!-- The mounting point for the React application -->
     <div id="root"></div>
-
-    <!-- 
-      CRITICAL FIX: Added the module script tag.
-      This tells Vite to load 'index.tsx' as the entry point. 
-      Vite will transform this TSX file into JavaScript and 
-      mount the <App /> component into the #root div above.
-    -->
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
