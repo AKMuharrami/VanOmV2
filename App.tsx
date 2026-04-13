@@ -4,7 +4,6 @@ import { MOCK_PRODUCTS, UI_TRANSLATIONS } from './constants';
 import { Product, CartItem, ProductSize } from './types';
 import { ShoppingBag, Menu, User, Search, Star, Globe } from 'lucide-react';
 import { CartDrawer } from './components/CartDrawer';
-import { AIChat } from './components/AIChat';
 import { Button } from './components/Button';
 
 // useEffect(() => {
@@ -307,7 +306,6 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
         lang={lang}
       />
       
-      <AIChat lang={lang} />
     </div>
   );
 };
