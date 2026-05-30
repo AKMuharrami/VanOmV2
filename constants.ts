@@ -11,7 +11,7 @@ export const MOCK_PRODUCTS: Product[] = [
     notes: ['Vanilla', 'Paste', 'Natural'],
     sizes: [
       // { label: '50ml', price: 6,  weightKg: 1.7},
-      { label: '100ml', price: '10',  weightKg: 1.7 },
+      { label: 'OutOfStock', price: 'NA',  weightKg: 1.7 },
       // { label: '200ml', price: 23.4,  weightKg: 1.7}
     ]
   },
