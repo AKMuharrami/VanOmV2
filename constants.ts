@@ -37,9 +37,9 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Nature',
      notes: ['Vanilla', 'Beans', 'Natural'],
     sizes: [
-      { label: '5 beans', price: 4, weightKg: 1.7},
-      { label: '10 beans', price: 8,  weightKg: 1.7 },
-      { label: '20 beans', price: 16,  weightKg: 1.7 }
+      // { label: '5 beans', price: 4, weightKg: 1.7},
+      { label: 'OutOfStock', price: 'NA',  weightKg: 1.7 },
+      // { label: '20 beans', price: 16,  weightKg: 1.7 }
     ]
   },
   // {
