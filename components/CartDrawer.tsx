@@ -81,20 +81,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           <p className="text-sm text-stone-500">{item.category}</p>
                         </div>
                         <div className="flex justify-between items-end">
-                          <div className="flex items-center border border-stone-200">
+                          <div className="flex items-center border border-stone-200 rounded-md overflow-hidden bg-white">
                             <button 
                               onClick={() => onUpdateQuantity(item.cartItemId, -1)}
-                              className="px-2 py-1 hover:bg-stone-100"
+                              className="w-8 h-8 flex items-center justify-center hover:bg-stone-50 text-stone-600 active:bg-stone-100"
                             >-</button>
-                            <span className="px-2 text-sm font-medium">{item.quantity}</span>
+                            <span className="w-8 text-center text-sm font-bold text-stone-900">{item.quantity}</span>
                             <button 
                               onClick={() => onUpdateQuantity(item.cartItemId, 1)}
-                              className="px-2 py-1 hover:bg-stone-100"
+                              className="w-8 h-8 flex items-center justify-center hover:bg-stone-50 text-stone-600 active:bg-stone-100"
                             >+</button>
                           </div>
                           <div className="flex items-center gap-3">
                             <span className="font-bold">{item.selectedSize.price.toFixed(3)} OMR</span>
-                            <button onClick={() => onRemoveItem(item.cartItemId)} className="text-stone-400 hover:text-red-500">
+                            <button onClick={() => onRemoveItem(item.cartItemId)} className="p-1.5 text-stone-400 hover:text-red-500 rounded-md hover:bg-stone-100 active:bg-stone-200 transition-colors">
                               <Trash2 className="w-4 h-4" />
                             </button>
                           </div>
@@ -148,7 +148,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         onClose={() => setIsCheckoutOpen(false)} 
         totalAmount={total}
         lang={lang}
-        cartItems={cartItems}
       />
     </div>
   );
