@@ -26,10 +26,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('paylater');
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
-    address: '',
-    city: ''
+    town: '',
+    province: ''
   });
   const [adimage, setadimage] = useState<string | ArrayBuffer | null>(undefined);
   const [apimage, setapimage] = useState<string | null>(undefined);
@@ -48,8 +47,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       phone: formData.phone, 
       image: apimage, 
       sum: JSON.stringify(cartItems), 
-      gml1: formData.address, 
-      gml2: formData.city, 
+      gml1: formData.town, 
+      gml2: formData.province, 
       hnum: formData.name, 
       total: totalAmount
     };
@@ -120,14 +119,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     value={formData.name}
                     onChange={e => setFormData({...formData, name: e.target.value})}
                   />
-                  <div className="grid grid-cols-2 gap-4">
-                    <input 
-                      type="email" 
-                      placeholder={t.fields.email}
-                      className="w-full border border-stone-300 p-3 rounded-md focus:ring-1 focus:ring-gold-500 outline-none"
-                      value={formData.email}
-                      onChange={e => setFormData({...formData, email: e.target.value})}
-                    />
+                  <div className="grid grid-cols-1 gap-4">
                     <input 
                       type="tel" 
                       placeholder={t.fields.phone}
@@ -138,18 +130,47 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   </div>
                   <input 
                     type="text" 
-                    placeholder={t.fields.address}
+                    placeholder={t.fields.town}
                     className="w-full border border-stone-300 p-3 rounded-md focus:ring-1 focus:ring-gold-500 outline-none"
-                    value={formData.address}
-                    onChange={e => setFormData({...formData, address: e.target.value})}
+                    value={formData.town}
+                    onChange={e => setFormData({...formData, town: e.target.value})}
                   />
-                  <input 
-                    type="text" 
-                    placeholder={t.fields.city}
-                    className="w-full border border-stone-300 p-3 rounded-md focus:ring-1 focus:ring-gold-500 outline-none"
-                    value={formData.city}
-                    onChange={e => setFormData({...formData, city: e.target.value})}
-                  />
+                  <select
+                    className="w-full border border-stone-300 p-3 rounded-md focus:ring-1 focus:ring-gold-500 outline-none bg-white text-stone-700"
+                    value={formData.province}
+                    onChange={e => setFormData({...formData, province: e.target.value})}
+                  >
+                    <option value="" disabled>{t.fields.province}</option>
+                    {isRtl ? (
+                      <>
+                        <option value="مسقط">مسقط</option>
+                        <option value="ظفار">ظفار</option>
+                        <option value="مسندم">مسندم</option>
+                        <option value="البريمي">البريمي</option>
+                        <option value="الداخلية">الداخلية</option>
+                        <option value="الظاهرة">الظاهرة</option>
+                        <option value="شمال الباطنة">شمال الباطنة</option>
+                        <option value="جنوب الباطنة">جنوب الباطنة</option>
+                        <option value="شمال الشرقية">شمال الشرقية</option>
+                        <option value="جنوب الشرقية">جنوب الشرقية</option>
+                        <option value="الوسطى">الوسطى</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="Muscat">Muscat</option>
+                        <option value="Dhofar">Dhofar</option>
+                        <option value="Musandam">Musandam</option>
+                        <option value="Al Buraimi">Al Buraimi</option>
+                        <option value="Ad Dakhiliyah">Ad Dakhiliyah</option>
+                        <option value="Ad Dhahirah">Ad Dhahirah</option>
+                        <option value="Al Batinah North">Al Batinah North</option>
+                        <option value="Al Batinah South">Al Batinah South</option>
+                        <option value="Ash Sharqiyah North">Ash Sharqiyah North</option>
+                        <option value="Ash Sharqiyah South">Ash Sharqiyah South</option>
+                        <option value="Al Wusta">Al Wusta</option>
+                      </>
+                    )}
+                  </select>
                 </div>
                 <div className="pt-4 flex justify-end">
                   <Button onClick={() => setStep('payment')} className="w-full sm:w-auto">
