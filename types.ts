@@ -8,6 +8,7 @@ export interface Product {
   id: string;
   name: string;
   description: string;
+  ingredients?: string;
   image: string;
   category: string;
   notes: string[];
@@ -30,11 +31,9 @@ export interface ShippingZone {
 
 export interface ShippingRate {
   id: string;
-  carrier: string;
-  serviceName: string;
+  name: string;
   price: number;
-  currency: string;
-  estimatedDelivery: string;
+  estimatedDays: string;
 }
 
 export interface ChatMessage {

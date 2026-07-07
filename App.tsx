@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { MOCK_PRODUCTS, UI_TRANSLATIONS } from './constants';
 import { Product, CartItem, ProductSize } from './types';
 import { ShoppingBag, Menu, User, Search, Star, Globe } from 'lucide-react';
@@ -18,13 +18,13 @@ const ProductCard: React.FC<{
 
   return (
     <div className="group flex flex-col bg-white rounded-xl shadow-sm border border-stone-100 overflow-hidden hover:shadow-md transition-shadow">
-      <div className="relative aspect-[4/5] overflow-hidden bg-stone-100">
+      <div className="relative aspect-[4/5] overflow-hidden bg-stone-50 flex items-center justify-center p-6">
         <img 
           src={product.image} 
           alt={product.name} 
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 drop-shadow-xl mix-blend-multiply"
         />
-        <div className={`absolute top-3 ${isRtl ? 'left-3' : 'right-3'} bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1 text-xs font-bold text-stone-900 shadow-sm`}>
+        <div className={`absolute top-3 ${isRtl ? 'left-3' : 'right-3'} bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1 text-xs font-bold text-stone-900 shadow-sm z-10`}>
           <Star className="w-3 h-3 fill-gold-500 text-gold-500" />
           4.9
         </div>
@@ -41,7 +41,7 @@ const ProductCard: React.FC<{
             <button
               key={size.label}
               onClick={() => setSelectedSize(size)}
-              className={`px-3 py-1.5 text-xs rounded-md border transition-all ${
+              className={`min-h-[44px] sm:min-h-0 px-4 py-2 sm:px-3 sm:py-1.5 text-sm sm:text-xs rounded-lg border transition-all ${
                 selectedSize.label === size.label 
                   ? 'border-gold-500 bg-gold-50 text-gold-900 font-bold shadow-sm' 
                   : 'border-stone-200 text-stone-500 hover:border-gold-300 bg-white'
@@ -62,10 +62,19 @@ const ProductCard: React.FC<{
 
         <button
           onClick={() => onAddToCart(product, selectedSize)}
-          className="w-full bg-stone-900 text-white py-3.5 rounded-lg hover:bg-gold-700 active:scale-[0.98] transition-all font-medium flex justify-center items-center gap-2 shadow-md"
+          disabled={selectedSize.price === 0}
+          className={`w-full py-4 sm:py-3.5 text-lg sm:text-base rounded-xl active:scale-[0.98] transition-all font-medium flex justify-center items-center gap-2 shadow-md ${
+            selectedSize.price === 0 
+              ? 'bg-stone-200 text-stone-500 cursor-not-allowed'
+              : 'bg-stone-900 text-white hover:bg-gold-700'
+          }`}
         >
           <ShoppingBag className="w-4 h-4" />
-          <span>{t.products.addToCart} • {selectedSize.price.toFixed(3)} OMR</span>
+          <span>
+            {selectedSize.price === 0 
+              ? (isRtl ? 'نفدت الكمية' : 'Out of Stock')
+              : `${t.products.addToCart} • ${selectedSize.price.toFixed(3)} OMR`}
+          </span>
         </button>
       </div>
     </div>
@@ -77,6 +86,7 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   
   const productsSectionRef = useRef<HTMLDivElement>(null);
   
@@ -94,7 +104,10 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
       }
       return [...prev, { ...product, quantity: 1, selectedSize: size, cartItemId }];
     });
-    setIsCartOpen(true);
+    
+    // Show toast
+    setToastMessage(isRtl ? `تم إضافة ${product.name} إلى السلة` : `Added ${product.name} to cart`);
+    setTimeout(() => setToastMessage(null), 3000);
   };
 
   const removeFromCart = (cartItemId: string) => {
@@ -192,30 +205,26 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
         )}
       </nav>
 
+  
       {/* Hero Section */}
       <section className="relative h-[80vh] bg-stone-900 overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?q=80&w=2070&auto=format&fit=crop" 
-            alt="Luxury Perfume" 
+            src="https://hjrm8lbtnby37npy.public.blob.vercel-storage.com/322E8E4A-9D18-4D18-B5D2-D8EB91E2DDD6.JPG" 
+            alt="Luxury Products" 
             className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent"></div>
         </div>
-        <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
-          <span className="text-gold-300 tracking-[0.2em] mb-4 text-sm font-medium animate-fade-in-up">{t.hero.limited}</span>
-          <h2 className="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight max-w-4xl animate-fade-in-up delay-100">
-            {t.hero.title} <br/><span className="italic text-gold-200">{t.hero.titleItalic}</span>
-          </h2>
-          <p className="text-stone-300 max-w-lg mb-10 text-lg font-light animate-fade-in-up delay-200">
+        <div className="relative h-full flex flex-col items-center justify-center text-center px-4" style={{backgroundColor:'rgba(250 250 250 .9)'}}>
+          {/* <span className="text-gold-300 tracking-[0.2em] mb-4 text-sm font-medium animate-fade-in-up">{t.hero.limited}</span>
+          <h2 className="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight max-w-4xl animate-fade-in-up delay-100" style={{color:'white'}}>
+            {t.hero.title} <br/><span className="italic text-gold-200" style={{color:'#D2A939'}}>{t.hero.titleItalic}</span>
+          </h2> */}
+          <p className="text-stone-300 max-w-lg mb-10 text-lg font-light animate-fade-in-up delay-200" style={{color:'black', backgroundColor:'white',}} >
             {t.hero.description}
           </p>
-          <Button 
-            size="lg" 
-            variant="secondary" 
-            className="animate-fade-in-up delay-300"
-            onClick={scrollToProducts}
-          >
+          <Button  onClick={scrollToProducts} size="lg" variant="secondary" className="animate-fade-in-up delay-300">
             {t.hero.cta}
           </Button>
         </div>
@@ -229,9 +238,12 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
           <p className="mt-4 text-stone-500 max-w-2xl mx-auto">
             {t.products.subtitle}
           </p>
+           <p className="mt-4 text-stone-500 max-w-2xl mx-auto">
+            ضمان لمدة سنة💫
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
           {MOCK_PRODUCTS.map((product) => (
             <ProductCard 
               key={product.id} 
@@ -263,7 +275,7 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-stone-200 py-12">
+      <footer className="bg-white border-t border-stone-200 py-12 pb-28 md:pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <h5 className="font-serif font-bold text-lg mb-4">VANILLA OM</h5>
@@ -293,6 +305,33 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
         </div>
       </footer>
 
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-stone-900 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 animate-in fade-in slide-in-from-top-4">
+          <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+            <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+          </div>
+          <span className="text-sm font-medium whitespace-nowrap">{toastMessage}</span>
+        </div>
+      )}
+
+      {/* Mobile Sticky Cart Bar */}
+      {cart.length > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 p-4 shadow-[0_-8px_16px_-4px_rgba(0,0,0,0.1)] z-40 md:hidden flex justify-between items-center animate-in slide-in-from-bottom-2">
+          <div>
+            <p className="text-xs text-stone-500">{cartCount} {isRtl ? 'عناصر' : 'items'}</p>
+            <p className="font-bold text-stone-900">{cart.reduce((sum, item) => sum + (item.selectedSize.price * item.quantity), 0).toFixed(3)} OMR</p>
+          </div>
+          <button 
+            onClick={() => setIsCartOpen(true)}
+            className="bg-stone-900 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 hover:bg-gold-700 active:scale-95 transition-all"
+          >
+            <ShoppingBag className="w-4 h-4" />
+            {isRtl ? 'عرض السلة' : 'View Cart'}
+          </button>
+        </div>
+      )}
+
       {/* Components */}
       <CartDrawer 
         isOpen={isCartOpen} 
@@ -303,7 +342,7 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
         lang={lang}
       />
       
-      <AIChat lang={lang} />
+      <AIChat products={MOCK_PRODUCTS} lang={lang} />
     </div>
   );
 };
@@ -311,12 +350,12 @@ const Storefront: React.FC<{ lang: 'en' | 'ar' }> = ({ lang }) => {
 // Router Container
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Storefront lang="en" />} />
         <Route path="/ar" element={<Storefront lang="ar" />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 };
 

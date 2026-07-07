@@ -71,12 +71,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <div className="space-y-6">
                   {cartItems.map((item) => (
                     <div key={item.cartItemId} className="flex gap-4">
-                      <img src={item.image} alt={item.name} className="w-20 h-24 object-cover bg-stone-100" />
-                      <div className="flex-1 flex flex-col justify-between">
+                      <div className="w-20 h-24 bg-stone-50 flex items-center justify-center p-2 rounded-md border border-stone-100 shrink-0">
+                        <img src={item.image} alt={item.name} className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm" />
+                      </div>
+                      <div className="flex-1 flex flex-col justify-between min-w-0">
                         <div>
-                          <div className="flex justify-between items-start">
-                            <h4 className="font-bold text-stone-900 font-serif">{item.name}</h4>
-                            <span className="text-xs bg-stone-100 text-stone-600 px-1.5 py-0.5 rounded">{item.selectedSize.label}</span>
+                          <div className="flex justify-between items-start gap-2">
+                            <h4 className="font-bold text-stone-900 font-serif truncate">{item.name}</h4>
+                            <span className="text-xs bg-stone-100 text-stone-600 px-1.5 py-0.5 rounded whitespace-nowrap">{item.selectedSize.label}</span>
                           </div>
                           <p className="text-sm text-stone-500">{item.category}</p>
                         </div>
@@ -84,18 +86,18 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           <div className="flex items-center border border-stone-200 rounded-md overflow-hidden bg-white">
                             <button 
                               onClick={() => onUpdateQuantity(item.cartItemId, -1)}
-                              className="w-8 h-8 flex items-center justify-center hover:bg-stone-50 text-stone-600 active:bg-stone-100"
+                              className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-stone-50 text-stone-600 active:bg-stone-100 transition-colors"
                             >-</button>
                             <span className="w-8 text-center text-sm font-bold text-stone-900">{item.quantity}</span>
                             <button 
                               onClick={() => onUpdateQuantity(item.cartItemId, 1)}
-                              className="w-8 h-8 flex items-center justify-center hover:bg-stone-50 text-stone-600 active:bg-stone-100"
+                              className="w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-stone-50 text-stone-600 active:bg-stone-100 transition-colors"
                             >+</button>
                           </div>
                           <div className="flex items-center gap-3">
-                            <span className="font-bold">{item.selectedSize.price.toFixed(3)} OMR</span>
-                            <button onClick={() => onRemoveItem(item.cartItemId)} className="p-1.5 text-stone-400 hover:text-red-500 rounded-md hover:bg-stone-100 active:bg-stone-200 transition-colors">
-                              <Trash2 className="w-4 h-4" />
+                            <span className="font-bold">{Number(item.selectedSize.price).toFixed(3)} OMR</span>
+                            <button onClick={() => onRemoveItem(item.cartItemId)} className="p-2 sm:p-1.5 text-stone-400 hover:text-red-500 rounded-md hover:bg-stone-100 active:bg-stone-200 transition-colors">
+                              <Trash2 className="w-5 h-5 sm:w-4 sm:h-4" />
                             </button>
                           </div>
                         </div>
@@ -127,7 +129,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 </div>
                 <div className="flex justify-between">
                   <span>{t.shipping}</span>
-                  <span>{selectedShipping ? `${selectedShipping.price.toFixed(3)} OMR` : t.calculatedAbove}</span>
+                  <span>{selectedShipping ? `${shippingCost.toFixed(3)} OMR` : t.calculatedAbove}</span>
                 </div>
                 <div className="flex justify-between text-lg font-bold text-stone-900 pt-2 border-t border-stone-200">
                   <span>{t.total}</span>
@@ -148,6 +150,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         onClose={() => setIsCheckoutOpen(false)} 
         totalAmount={total}
         lang={lang}
+        cartItems={cartItems}
       />
     </div>
   );

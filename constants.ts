@@ -11,7 +11,7 @@ export const MOCK_PRODUCTS: Product[] = [
     notes: ['Vanilla', 'Paste', 'Natural'],
     sizes: [
       // { label: '50ml', price: 6,  weightKg: 1.7},
-      { label: '100ml', price: '11.8',  weightKg: 1.7 },
+      { label: '100ml', price: 11.8,  weightKg: 1.7 },
       // { label: '200ml', price: 23.4,  weightKg: 1.7}
     ]
   },
@@ -24,7 +24,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Floral',
      notes: ['Vanilla', 'Extract', 'Natural'],
     sizes: [
-      { label: 'OutOfStock', price: 'NA',  weightKg: 1.7 },
+      { label: 'OutOfStock', price: 0,  weightKg: 1.7 },
       // { label: '100ml', price: 10,  weightKg: 1.7 },
       // { label: '200ml', price: 19.7, weightKg: 1.7}
     ]
@@ -38,7 +38,7 @@ export const MOCK_PRODUCTS: Product[] = [
      notes: ['Vanilla', 'Beans', 'Natural'],
     sizes: [
       // { label: '5 beans', price: 4, weightKg: 1.7},
-      { label: 'OutOfStock', price: 'NA',  weightKg: 1.7 },
+      { label: 'OutOfStock', price: 0,  weightKg: 1.7 },
       // { label: '20 beans', price: 16,  weightKg: 1.7 }
     ]
   },
@@ -256,8 +256,8 @@ export const UI_TRANSLATIONS = {
       methods: {
         thawani: 'Thawani Pay',
         paylater: 'Pay Later',
-        card: 'Credit Card',
-        transfer: 'Bank Transfer'
+        card: 'Credit Card (Currently Down)',
+        transfer: 'Phone Transfer'
       },
       fields: {
         name: 'Full Name',
@@ -346,9 +346,9 @@ export const UI_TRANSLATIONS = {
       total: 'المبلغ الإجمالي',
       methods: {
         thawani: 'ثواني',
-        card: 'بطاقة ائتمان',
+        card: 'بطاقة ائتمان (غير متاح حالياً)',
         paylater: 'الدفع لاحقاً',
-        transfer: 'تحويل بنكي'
+        transfer: 'تحويل عبر الهاتف'
       },
       fields: {
         name: 'الاسم الكامل',
